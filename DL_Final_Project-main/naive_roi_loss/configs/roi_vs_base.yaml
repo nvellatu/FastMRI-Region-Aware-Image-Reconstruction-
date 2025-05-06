@@ -1,0 +1,79 @@
+data_path: /home/hice1/ltupac3/scratch/fastMRI_data #/singlecoil_train
+mask_type: random
+center_fractions: [0.08]
+accelerations: [4]
+challenge: singlecoil
+
+# only for pace cluster!
+use_gpu: True 
+
+# FastMriDataModule args
+batch_size: 1
+num_workers: 8 # default is 1. I keep getting warns to set 24 workers bc thats how much CPU I have in pace?
+test_split: val            # can be 'val' or 'test'
+test_path: /home/hice1/ltupac3/scratch/fastMRI_data/singlecoil_test            
+sample_rate: 0.01          # optional: subsample % for training (e.g. 0.05)
+
+# make it reproducable 
+seed: 42 # default is 42
+
+in_chans: 1
+out_chans: 1
+chans: 64
+num_pool_layers: 4 # default 4
+drop_prob: 0.0
+lr: 0.001
+lr_step_size: 30
+lr_gamma: 0.1
+weight_decay: 0.0
+gpus: 2
+distributed_backend: ddp
+max_epochs: 5
+default_root_dir: roi_best_searchdata_path: /home/hice1/ltupac3/scratch/fastMRI_data #/singlecoil_train
+mask_type: random
+center_fractions: [0.08]
+accelerations: [4]
+challenge: singlecoil
+
+# only for pace cluster!
+use_gpu: True 
+
+# FastMriDataModule args
+batch_size: 1
+num_workers: 8 # default is 1. I keep getting warns to set 24 workers bc thats how much CPU I have in pace?
+test_split: val            # can be 'val' or 'test'
+test_path: /home/hice1/ltupac3/scratch/fastMRI_data/singlecoil_test            
+sample_rate: 0.1          # optional: subsample % for training (e.g. 0.05)
+
+# make it reproducable 
+seed: 42 # default is 42
+
+in_chans: 1
+out_chans: 1
+chans: 32
+num_pool_layers: 5 # default 4
+drop_prob: 0.0
+lr: 0.001
+lr_step_size: 40
+lr_gamma: 0.1
+weight_decay: 0.0
+gpus: 2
+distributed_backend: ddp
+max_epochs: 30 # may be too high but lets see.....
+default_root_dir: roi_unet_checkpoints
+
+# roi loss 
+alpha: 1.5 # 1 means no mask
+roi_size: 128
+
+
+# checkpoint
+resume: False # false for tuning
+
+# roi loss 
+alpha: 1.5 # 1 means no mask
+roi_size: 128
+
+
+# checkpoint
+resume: True # false for tuning

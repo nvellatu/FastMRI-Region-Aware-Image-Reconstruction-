@@ -1,0 +1,39 @@
+# === Data ===
+data_path: /home/hice1/ltupac3/scratch/fastMRI_data
+mask_type: random
+center_fractions: [0.08]
+accelerations: [4]
+challenge: singlecoil
+test_split: val
+test_path: /home/hice1/ltupac3/scratch/fastMRI_data/singlecoil_test
+sample_rate: 0.001  # Full dataset, as in leaderboard
+batch_size: 1
+
+# === Cluster Setup ===
+use_gpu: True
+gpus: 2
+num_workers: 4  # safe middle ground for PACE (was 4)
+distributed_backend: ddp
+default_root_dir: unet_checkpoints
+seed: 42
+
+# === Model Architecture ===
+in_chans: 1
+out_chans: 1
+chans: 256        # Leaderboard value 
+num_pool_layers: 4  # Leaderboard value 
+drop_prob: 0.0
+
+# === Optimization ===
+lr: 0.001           # Leaderboard value 
+lr_step_size: 40
+lr_gamma: 0.1
+weight_decay: 0.0
+max_epochs: 50      # Leaderboard value 
+
+# === ROI Loss (Disabled for baseline) ===
+alpha: 1            # 1 disables ROI emphasis
+roi_size: 128
+
+# === Checkpointing ===
+resume: False
